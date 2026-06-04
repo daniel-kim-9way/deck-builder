@@ -1,0 +1,46 @@
+{
+  "name": "ink-mono",
+  "colors": {
+    "primary": "2B2B2B",
+    "primary_active": "222222",
+    "primary_disabled": "BEBEBC",
+    "accent_teal": "7A7A7A",
+    "accent_amber": "A8A29E",
+    "canvas": "F7F7F5",
+    "surface_soft": "F0F0EE",
+    "surface_card": "E8E8E6",
+    "surface_cream_strong": "DEDEDC",
+    "surface_dark": "161616",
+    "surface_dark_elevated": "262626",
+    "surface_dark_soft": "1E1E1E",
+    "hairline": "E3E3E1",
+    "hairline_soft": "EBEBE9",
+    "ink": "161616",
+    "body_strong": "292929",
+    "body": "454545",
+    "muted": "818181",
+    "muted_soft": "9D9D9D",
+    "on_primary": "FFFFFF",
+    "on_dark": "F7F7F5",
+    "on_dark_soft": "868686",
+    "success": "5DB872",
+    "warning": "D4A017",
+    "error": "C64545"
+  },
+  "fonts": {
+    "body": "Pretendard",
+    "display": "Pretendard",
+    "mono": "Consolas",
+    "weights": {
+      "Thin": "Pretendard Thin",
+      "ExtraLight": "Pretendard ExtraLight",
+      "Light": "Pretendard Light",
+      "Regular": "Pretendard",
+      "Medium": "Pretendard Medium",
+      "SemiBold": "Pretendard SemiBold",
+      "ExtraBold": "Pretendard ExtraBold",
+      "Black": "Pretendard Black"
+    }
+  },
+  "about": "미니멀 모노톤 — 잉크 블랙 + 그레이. 차분한 가이드북/보고용."
+}

@@ -1,0 +1,46 @@
+{
+  "name": "slate-blue",
+  "colors": {
+    "primary": "2563EB",
+    "primary_active": "1D4DB7",
+    "primary_disabled": "C2D3F9",
+    "accent_teal": "0EA5E9",
+    "accent_amber": "F59E0B",
+    "canvas": "FFFFFF",
+    "surface_soft": "F7F7F7",
+    "surface_card": "F0F0F0",
+    "surface_cream_strong": "E6E6E6",
+    "surface_dark": "0B1220",
+    "surface_dark_elevated": "1C2330",
+    "surface_dark_soft": "141A28",
+    "hairline": "EBEBEB",
+    "hairline_soft": "F2F2F2",
+    "ink": "0F172A",
+    "body_strong": "222A3B",
+    "body": "3F4555",
+    "muted": "7D828C",
+    "muted_soft": "9A9EA6",
+    "on_primary": "FFFFFF",
+    "on_dark": "FFFFFF",
+    "on_dark_soft": "858890",
+    "success": "5DB872",
+    "warning": "D4A017",
+    "error": "C64545"
+  },
+  "fonts": {
+    "body": "Pretendard",
+    "display": "Pretendard",
+    "mono": "Consolas",
+    "weights": {
+      "Thin": "Pretendard Thin",
+      "ExtraLight": "Pretendard ExtraLight",
+      "Light": "Pretendard Light",
+      "Regular": "Pretendard",
+      "Medium": "Pretendard Medium",
+      "SemiBold": "Pretendard SemiBold",
+      "ExtraBold": "Pretendard ExtraBold",
+      "Black": "Pretendard Black"
+    }
+  },
+  "about": "기업/IT 제안·보고용 — 슬레이트 블루 + 화이트."
+}

@@ -1,0 +1,25 @@
+{
+  "name": "cream-coral",
+  "about": "Anthropic/Claude 스타일 — 따뜻한 크림 캔버스 + 코랄 + 다크 네이비. Pretendard.",
+  "colors": {
+    "primary": "CC785C", "primary_active": "A9583E", "primary_disabled": "E6DFD8",
+    "accent_teal": "5DB8A6", "accent_amber": "E8A55A",
+    "canvas": "FAF9F5", "surface_soft": "F5F0E8", "surface_card": "EFE9DE",
+    "surface_cream_strong": "E8E0D2", "surface_dark": "181715",
+    "surface_dark_elevated": "252320", "surface_dark_soft": "1F1E1B",
+    "hairline": "E6DFD8", "hairline_soft": "EBE6DF",
+    "ink": "141413", "body_strong": "252523", "body": "3D3D3A",
+    "muted": "6C6A64", "muted_soft": "8E8B82",
+    "on_primary": "FFFFFF", "on_dark": "FAF9F5", "on_dark_soft": "A09D96",
+    "success": "5DB872", "warning": "D4A017", "error": "C64545"
+  },
+  "fonts": {
+    "body": "Pretendard", "display": "Pretendard", "mono": "Consolas",
+    "weights": {
+      "Thin": "Pretendard Thin", "ExtraLight": "Pretendard ExtraLight",
+      "Light": "Pretendard Light", "Regular": "Pretendard",
+      "Medium": "Pretendard Medium", "SemiBold": "Pretendard SemiBold",
+      "ExtraBold": "Pretendard ExtraBold", "Black": "Pretendard Black"
+    }
+  }
+}
