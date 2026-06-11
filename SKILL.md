@@ -57,11 +57,10 @@ th.save(t, "OUTPUT/<프로젝트>/theme.json")   # 프로젝트에 함께 저장
 `decktypes.flow("<유형>")`의 추천 구성을 참고해 슬라이드 리스트를 짠다.
 같은 레이아웃을 3장 이상 연속 쓰지 않는다. 다크/포스터로 리듬을 준다.
 
-### 4) 빌드 스크립트 작성 → `OUTPUT/<프로젝트>/build.py`
+### 4) 빌드 스크립트 작성 → `OUTPUT/deck-builder/<프로젝트>/build.py`
 ```python
 import os, sys
-sys.path.insert(0, os.path.join(os.path.expanduser("~"),
-                                ".claude", "skills", "deck-builder", "deck"))
+sys.path.insert(0, r"D:\futuretalent_ai\.claude\skills\deck-builder\deck")
 from builder import Deck
 import layouts as L
 
@@ -82,17 +81,19 @@ PowerPoint COM으로 `render/`에 PNG를 내보내 Read로 확인하고, 잘림/
 `.pptx` 경로 + 구성 요약 + 폰트 의존성(다른 PC에서 해당 폰트 필요)을 보고한다.
 
 ## 출력 위치 규칙 (필수)
-모든 결과물은 **현재 작업 폴더(cwd) 아래 `OUTPUT/<프로젝트명>/`** 에 모은다.
+모든 결과물은 **`<root>/deck-builder/<프로젝트명>/`** 에 모은다.
+(root = 환경변수 `FT_OUTPUT_ROOT`, 없으면 `현재폴더(cwd)/OUTPUT`)
 ```
-<현재폴더>/OUTPUT/<프로젝트명>/
+<root>/deck-builder/<프로젝트명>/
   build.py · <파일명>.pptx · theme.json(커스텀일 때) · render/
 ```
-- `d.save_project("<프로젝트명>","<파일>.pptx")` → `<cwd>/OUTPUT/<프로젝트명>/` 자동 생성.
+- `d.save_project("<프로젝트명>","<파일>.pptx")` → 위 경로 자동 생성.
+- 이 프로젝트에선 `D:\futuretalent_ai\OUTPUT\deck-builder\<프로젝트명>\` 로 떨어진다(cwd=프로젝트 루트 기준).
 
-## 이식성 (다른 PC·공개 배포)
-사용자 전역(`~/.claude/skills/`)에 있으면 모든 프로젝트에서 자동 사용 가능(복사 불필요).
-다른 PC/계정은 `deck-builder` 폴더를 `~/.claude/skills/`에 복사 + `python-pptx`·폰트
-설치. 빌드 스크립트는 `~`(홈) 기준 경로라 계정명이 달라도 동작한다.
+## 위치 · 이식성
+이 스킬은 **프로젝트 로컬**(`D:\futuretalent_ai\.claude\skills\deck-builder`)에 있다(전역 아님, 자급자족).
+다른 PC로 옮길 땐 이 폴더째 복사 + `python-pptx`·Pretendard 폰트 설치, 그리고 build.py의
+`sys.path` 절대경로만 새 위치에 맞게 바꾼다. (card-news-builder가 이 스킬을 형제 폴더로 참조)
 
 ## 가이드라인
 - 색 절제: 주색(primary)은 강조·CTA에만. 다크 서피스로 대비/리듬.

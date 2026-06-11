@@ -103,6 +103,38 @@ def _soft_shadow(sp):
 
 
 # ---------------------------------------------------------------------------
+# 이미지 (스크린샷 / 가이드북)
+# ---------------------------------------------------------------------------
+def picture(slide, x, y, w, h, path=None, frame=True, radius=10,
+            caption="스크린샷"):
+    """이미지 박스. path가 있으면 비율 유지 fit + 중앙 배치, 없으면 플레이스홀더.
+    가이드북의 '우측 스크린샷' 패턴용. 프레임(hairline) 선택."""
+    import os
+    bx, by, bw, bh = px(x), px(y), px(w), px(h)
+    if path and os.path.isfile(path):
+        if frame:
+            rect(slide, x, y, w, h, fill="surface_soft", line="hairline",
+                 radius=radius)
+        pic = slide.shapes.add_picture(path, bx, by)
+        nw, nh = pic.width, pic.height
+        scale = min(bw / nw, bh / nh)
+        pic.width = int(nw * scale)
+        pic.height = int(nh * scale)
+        pic.left = int(bx + (bw - pic.width) / 2)
+        pic.top = int(by + (bh - pic.height) / 2)
+        return pic
+    # 플레이스홀더 (이미지 미제공 시에도 레이아웃이 깨지지 않게)
+    rect(slide, x, y, w, h, fill="surface_card", line="hairline", radius=radius)
+    oval(slide, x + w / 2 - 28, y + h / 2 - 44, 56, 56, fill="surface_soft",
+         line="hairline")
+    text(slide, x + w / 2 - 28, y + h / 2 - 44, 56, 56, "🖼",
+         color="muted", align="center", valign="middle", size_px=24)
+    text(slide, x, y + h / 2 + 26, w, 28, caption, type_token="caption_upper",
+         color="muted_soft", align="center")
+    return None
+
+
+# ---------------------------------------------------------------------------
 # 텍스트
 # ---------------------------------------------------------------------------
 def _apply_run(run, type_token=None, size_px=None, weight=None,

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Deck — 덱 빌더. 테마(폰트+스타일)와 덱 유형을 받아 슬라이드를 만든다.
-16:9 (1280x720 px). 출력은 현재 작업 폴더(cwd)/OUTPUT/<프로젝트>/.
+16:9 (1280x720 px). 출력은 <FT_OUTPUT_ROOT 또는 cwd/OUTPUT>/deck-builder/<프로젝트>/.
 """
 import os
 from pptx import Presentation
@@ -11,11 +11,13 @@ from helpers import px, rgb, text
 
 
 def output_root():
-    return os.path.join(os.getcwd(), "OUTPUT")
+    # FT_OUTPUT_ROOT 가 있으면 그걸, 없으면 현재 작업폴더/OUTPUT (이식성 유지)
+    return os.environ.get("FT_OUTPUT_ROOT") or os.path.join(os.getcwd(), "OUTPUT")
 
 
 def project_dir(project, sub=None):
-    parts = [output_root(), project] + ([sub] if sub else [])
+    # 결과물은 <root>/deck-builder/<project>[/<sub>] — 스킬별로 묶는다
+    parts = [output_root(), "deck-builder", project] + ([sub] if sub else [])
     d = os.path.join(*parts)
     os.makedirs(d, exist_ok=True)
     return d
@@ -57,7 +59,7 @@ class Deck:
         return path
 
     def save_project(self, project, filename="deck.pptx"):
-        """<cwd>/OUTPUT/<project>/<filename> 에 저장."""
+        """<root>/deck-builder/<project>/<filename> 에 저장 (root=FT_OUTPUT_ROOT 또는 cwd/OUTPUT)."""
         path = os.path.join(project_dir(project), filename)
         self.prs.save(path)
         return path
