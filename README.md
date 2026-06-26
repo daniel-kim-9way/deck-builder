@@ -1,4 +1,4 @@
-# deck-builder
+# PPT Design
 
 **디자인 시스템 기반 PPTX 덱 생성기** — Claude Code / Claude Agent 스킬.
 폰트와 색(테마)을 정의하면, 같은 콘텐츠 코드가 그 스타일의 수정 가능한 `.pptx`로 나온다.
@@ -39,7 +39,7 @@ DESIGN.md를 이 프로젝트의 덱 프리셋으로 사용해줘.
 ### 2) 설치 (한 번만, ~2분)
 ```bash
 # (1) 이 폴더를 스킬 디렉터리에 배치
-#     Claude Code:  ~/.claude/skills/deck-builder/
+#     Claude Code:  ~/.claude/skills/ppt-design/
 # (2) 의존성 설치
 pip install python-pptx
 # (3) 폰트 설치 — 기본은 Pretendard (https://github.com/orioncactus/pretendard)
@@ -106,7 +106,7 @@ DESIGN.md 스타일로 강의안 만들어줘.
 ## 설치
 ```bash
 # 1) 스킬 폴더를 사용자 스킬 디렉터리에 배치
-#    Claude Code:  ~/.claude/skills/deck-builder/
+#    Claude Code:  ~/.claude/skills/ppt-design/
 # 2) 의존성
 pip install python-pptx
 # 3) 테마 폰트 설치 (기본: Pretendard). 미설치 시 시스템 폰트로 대체.
@@ -129,7 +129,7 @@ Claude가 ① 유형·테마 확인 → ② (커스텀이면) 테마 생성 → 
 ```python
 import os, sys
 sys.path.insert(0, os.path.join(os.path.expanduser("~"),
-                                ".claude", "skills", "deck-builder", "deck"))
+                                ".claude", "skills", "ppt-design", "deck"))
 from builder import Deck
 import layouts as L
 

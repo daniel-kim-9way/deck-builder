@@ -1,9 +1,9 @@
 ---
-name: deck-builder
+name: ppt-design
 description: 발표자료(PPTX)를 디자인 시스템 기반으로 생성한다. 사용자가 폰트와 색/스타일을 주면 그 테마로, 안 주면 기본(크림·코랄) 테마로 만든다. 제안서·보고서·강의·가이드북 등 덱 유형별 구성을 지원한다. 파라미터화된 레이아웃 라이브러리로 수정 가능한 .pptx를 만든다. "PPT/발표자료/강의안/제안서/보고서/가이드북 만들어줘", "이 스타일로 슬라이드", "우리 브랜드 색으로 덱" 등에 사용.
 ---
 
-# Deck Builder — 테마 가능한 PPTX 덱 생성기
+# PPT Design — 테마 가능한 PPTX 덱 생성기
 
 디자인 시스템(색·폰트·레이아웃)을 코드로 정의해 일관된 `.pptx`를 찍어낸다.
 **테마(폰트+스타일)는 교체 가능**하고, **덱 유형(제안서/보고서/강의/가이드북)**별로
@@ -74,10 +74,10 @@ th.save(t, "OUTPUT/<프로젝트>/theme.json")   # 프로젝트에 함께 저장
 `decktypes.flow("<유형>")`의 추천 구성을 참고해 슬라이드 리스트를 짠다.
 같은 레이아웃을 3장 이상 연속 쓰지 않는다. 다크/포스터로 리듬을 준다.
 
-### 5) 빌드 스크립트 작성 → `OUTPUT/deck-builder/<프로젝트>/build.py`
+### 5) 빌드 스크립트 작성 → `OUTPUT/ppt-design/<프로젝트>/build.py`
 ```python
 import os, sys
-sys.path.insert(0, r"D:\futuretalent_ai\.claude\skills\deck-builder\deck")
+sys.path.insert(0, r"D:\futuretalent_ai\.claude\skills\ppt-design\deck")
 from builder import Deck
 import layouts as L
 
@@ -98,17 +98,17 @@ PowerPoint COM으로 `render/`에 PNG를 내보내 Read로 확인하고, 잘림/
 `.pptx` 경로 + 구성 요약 + 폰트 의존성(다른 PC에서 해당 폰트 필요)을 보고한다.
 
 ## 출력 위치 규칙 (필수)
-모든 결과물은 **`<root>/deck-builder/<프로젝트명>/`** 에 모은다.
+모든 결과물은 **`<root>/ppt-design/<프로젝트명>/`** 에 모은다.
 (root = 환경변수 `FT_OUTPUT_ROOT`, 없으면 `현재폴더(cwd)/OUTPUT`)
 ```
-<root>/deck-builder/<프로젝트명>/
+<root>/ppt-design/<프로젝트명>/
   build.py · <파일명>.pptx · theme.json(커스텀일 때) · render/
 ```
 - `d.save_project("<프로젝트명>","<파일>.pptx")` → 위 경로 자동 생성.
-- 이 프로젝트에선 `D:\futuretalent_ai\OUTPUT\deck-builder\<프로젝트명>\` 로 떨어진다(cwd=프로젝트 루트 기준).
+- 이 프로젝트에선 `D:\futuretalent_ai\OUTPUT\ppt-design\<프로젝트명>\` 로 떨어진다(cwd=프로젝트 루트 기준).
 
 ## 위치 · 이식성
-이 스킬은 **프로젝트 로컬**(`D:\futuretalent_ai\.claude\skills\deck-builder`)에 있다(전역 아님, 자급자족).
+이 스킬은 **프로젝트 로컬**(`D:\futuretalent_ai\.claude\skills\ppt-design`)에 있다(전역 아님, 자급자족).
 다른 PC로 옮길 땐 이 폴더째 복사 + `python-pptx`·Pretendard 폰트 설치, 그리고 build.py의
 `sys.path` 절대경로만 새 위치에 맞게 바꾼다. (card-news-builder가 이 스킬을 형제 폴더로 참조)
 

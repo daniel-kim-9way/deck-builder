@@ -2,12 +2,13 @@
 """예제: 기본 테마(cream-coral)로 짧은 강의 덱. 현재 폴더의 OUTPUT/에 생성."""
 import os
 import sys
-sys.path.insert(0, os.path.join(os.path.expanduser("~"),
-                                ".claude", "skills", "deck-builder", "deck"))
+repo_deck = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "deck"))
+installed_deck = os.path.join(os.path.expanduser("~"), ".claude", "skills", "ppt-design", "deck")
+sys.path.insert(0, repo_deck if os.path.isdir(repo_deck) else installed_deck)
 from builder import Deck
 import layouts as L
 
-d = Deck(theme="cream-coral", kind="lecture", brand="Example · Deck Builder")
+d = Deck(theme="cream-coral", kind="lecture", brand="Example · PPT Design")
 
 L.cover(d, title="강점으로 일하는 법", title2="나와 팀의 잠재력",
         subtitle="뇌과학 기반 강점 워크샵", brand="DECK", eyebrow="LECTURE")
@@ -29,6 +30,6 @@ L.do_dont(d, "강점 코칭",
           dos=["강점에 맞는 역할", "구체적 피드백"],
           donts=["약점만 지적", "같은 잣대"])
 L.poster(d, "강점에\n집중하라", eyebrow="MINDSET", sub="약점 보완보다 강점 확장")
-L.closing(d, "함께 시작하시죠", sub="Deck Builder", contact="hello@example.com")
+L.closing(d, "함께 시작하시죠", sub="PPT Design", contact="hello@example.com")
 
 print(d.save_project("example-lecture", "Example_Lecture.pptx"))

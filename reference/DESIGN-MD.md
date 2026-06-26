@@ -2,22 +2,22 @@
 
 사용자가 **getdesign.md 형식의 디자인 시스템 마크다운**(getdesign.md / `/preview-design`
 스타일, `{colors.*}` `{typography.*}` `{rounded.*}` 토큰을 쓰는 문서)을 붙여넣으면,
-그 내용을 읽어 **deck-builder 테마 JSON**으로 변환한다. 이후 그 테마로 덱을 만든다.
+그 내용을 읽어 **PPT Design 테마 JSON**으로 변환한다. 이후 그 테마로 덱을 만든다.
 
 > 참고: https://getdesign.md/ — URL/브랜드에서 이런 디자인 시스템 명세를 생성하는 도구.
 > 이 스킬은 그 산출물을 받아 PPTX 테마로 재현한다.
 
 ## 절차
 1. 명세에서 **canvas 색의 밝기**로 라이트/다크를 판별한다(near-black이면 `mode:"dark"`).
-2. 명세의 `{colors.*}`를 아래 표대로 deck-builder 슬롯에 매핑한다.
+2. 명세의 `{colors.*}`를 아래 표대로 PPT Design 슬롯에 매핑한다.
    명세에 없는 슬롯은 `theme.build_palette[_dark]`의 파생 규칙대로 채우거나
    가장 가까운 값을 쓴다.
 3. 폰트: 본문/디스플레이 = 명세의 sans, mono = 명세의 mono. 굵기별 패밀리가
    명시돼 있으면 `weights`에 넣는다.
 4. `theme.json`을 `OUTPUT/<프로젝트>/theme.json`에 저장하고 `Deck(theme=...)`로 쓴다.
 
-## 색 슬롯 매핑 (getdesign.md → deck-builder)
-| deck-builder 슬롯 | 라이트 명세 출처 | 다크 명세 출처 |
+## 색 슬롯 매핑 (getdesign.md → PPT Design)
+| PPT Design 슬롯 | 라이트 명세 출처 | 다크 명세 출처 |
 |---|---|---|
 | `primary` | `{colors.primary}` | `{colors.primary}` |
 | `primary_active` | primary 진한 변형 / `primary-deep` | 〃 |
