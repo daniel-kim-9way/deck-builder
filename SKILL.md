@@ -26,18 +26,35 @@ description: 발표자료(PPTX)를 디자인 시스템 기반으로 생성한다
 
 ## 워크플로
 
-### 1) 유형 + 테마 정하기 (첫 사용 시 질문)
+### 1) 덱 프리셋 확인하기 (첫 사용 시 우선)
+처음 사용하는 사용자에게는 바로 슬라이드를 만들기 전에 **덱 스타일 프리셋**을 먼저 확인한다.
+가장 권장하는 방식은 [getdesign.md/design-md](https://getdesign.md/design-md)에서 원하는 사이트를 고르고,
+그 사이트의 `DESIGN.md`를 덱 프리셋으로 쓰는 것이다.
+
+사용자가 아직 스타일을 정하지 않았다면 이렇게 안내한다:
+```text
+먼저 getdesign.md/design-md에서 원하는 사이트 스타일의 DESIGN.md를 골라 덱 프리셋으로 쓰는 것을 권장합니다.
+가져온 DESIGN.md를 프로젝트에 두면 그 색상, 폰트, 여백, 톤을 기준으로 PPT를 만들 수 있습니다.
+바로 시작하려면 기본 cream-coral 테마로 만들 수도 있습니다.
+```
+
+이미 `DESIGN.md`가 프로젝트에 있거나 사용자가 붙여넣었다면, 그 명세를 먼저 읽고
+`reference/DESIGN-MD.md`의 매핑대로 테마로 변환한다. 이후 생성되는 덱은 이 테마를 기본값으로 삼는다.
+
+### 2) 유형 + 테마 정하기
 사용자에게 두 가지를 확인한다(이미 말했으면 생략):
 - **덱 유형**: 제안서 / 보고서 / 강의 / 가이드북 (`proposal|report|lecture|guidebook`)
 - **디자인 테마**:
-  - (a) 프리셋 사용: `cream-coral`(기본) / `slate-blue` / `ink-mono`
-  - (b) **사용자 스타일 제공**: 폰트명 + 핵심 색 몇 개(주색·배경·글자색·다크색)
+  - (a) **getdesign.md에서 가져온 `DESIGN.md` 사용**: 첫 사용 시 가장 권장.
+    `{colors.*}`·`{typography.*}` 토큰을 읽어 테마로 변환한다.
+  - (b) 프리셋 사용: `cream-coral`(기본) / `slate-blue` / `ink-mono`
+  - (c) **사용자 스타일 제공**: 폰트명 + 핵심 색 몇 개(주색·배경·글자색·다크색)
     또는 참고 이미지/URL의 색. → `theme.from_seeds(...)`로 전체 팔레트 자동 생성.
-  - (c) **디자인 시스템 명세(getdesign.md) 붙여넣음**: `{colors.*}`·`{typography.*}`
+  - (d) **디자인 시스템 명세(getdesign.md) 붙여넣음**: `{colors.*}`·`{typography.*}`
     토큰을 쓰는 마크다운을 받으면 → **`reference/DESIGN-MD.md`의 매핑대로 테마로 변환**.
     near-black 캔버스면 `mode:"dark"`(카드 자동 hairline). 예: `voltagent-dark` 프리셋.
 
-### 2) (사용자 스타일일 때) 테마 파일 생성
+### 3) (사용자 스타일일 때) 테마 파일 생성
 ```python
 import theme as th
 t = th.from_seeds(
@@ -53,11 +70,11 @@ th.save(t, "OUTPUT/<프로젝트>/theme.json")   # 프로젝트에 함께 저장
 시드 4~6색에서 26개 의미 슬롯(surface/hairline/muted/on_dark 등)을 자동 파생한다.
 굵기별 폰트 패밀리가 있으면 `weights={...}`로 지정(없으면 bold로 근사).
 
-### 3) 슬라이드 기획 (유형 흐름 참고)
+### 4) 슬라이드 기획 (유형 흐름 참고)
 `decktypes.flow("<유형>")`의 추천 구성을 참고해 슬라이드 리스트를 짠다.
 같은 레이아웃을 3장 이상 연속 쓰지 않는다. 다크/포스터로 리듬을 준다.
 
-### 4) 빌드 스크립트 작성 → `OUTPUT/deck-builder/<프로젝트>/build.py`
+### 5) 빌드 스크립트 작성 → `OUTPUT/deck-builder/<프로젝트>/build.py`
 ```python
 import os, sys
 sys.path.insert(0, r"D:\futuretalent_ai\.claude\skills\deck-builder\deck")
@@ -73,11 +90,11 @@ L.stat_cards(d, "...", [("…","…","…"), ...])
 print(d.save_project(PROJECT, "ACME_Proposal.pptx"))
 ```
 
-### 5) 실행 & 검증
+### 6) 실행 & 검증
 현재 폴더에서 `python OUTPUT/<프로젝트>/build.py` 실행 → `OUTPUT/<프로젝트>/`에 생성.
 PowerPoint COM으로 `render/`에 PNG를 내보내 Read로 확인하고, 잘림/오버플로를 고친다.
 
-### 6) 전달
+### 7) 전달
 `.pptx` 경로 + 구성 요약 + 폰트 의존성(다른 PC에서 해당 폰트 필요)을 보고한다.
 
 ## 출력 위치 규칙 (필수)
